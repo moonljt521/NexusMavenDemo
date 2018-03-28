@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+def library = rootProject.ext.dependencies
+def version = rootProject.ext.android
+
+android {
+    compileSdkVersion version.compileSdkVersion
+    buildToolsVersion version.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        versionCode version.versionCode
+        versionName version.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            snapshotRepository(url: MAVEN_REPO_SNAPSHOT_URL) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+            repository(url: MAVEN_REPO_RELEASE_URL) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+
+            pom.groupId = GROUP_ID
+            pom.artifactId = "xultrarecyclerview"
+//            pom.version = "1.0.2"
+            pom.version = "1.0.3-SNAPSHOT"
+            pom.packaging = TYPE
+        }
+    }
+}

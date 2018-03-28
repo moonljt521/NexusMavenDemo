@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="xheadview_height">100px</dimen>
+    <dimen name="xheadview_centy">50px</dimen>
+
+</resources>
