@@ -1,1 +1,1 @@
-include ':app', ':xultrarecycle', ':jpushLib'
+include ':app', ':xultrarecycle', ':jpushLib', ':baidumap'

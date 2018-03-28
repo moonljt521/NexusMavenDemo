@@ -9,6 +9,10 @@ buildscript {
         maven {
             url "http://192.168.0.150:8081/repository/doingMaven/"
         }
+
+        maven {
+            url "http://192.168.0.150:8081/repository/doingSnapshotsMaven/"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -25,6 +29,10 @@ allprojects {
         jcenter()
         maven {
             url "http://192.168.0.150:8081/repository/doingMaven/"
+        }
+
+        maven {
+            url "http://192.168.0.150:8081/repository/doingSnapshotsMaven/"
         }
     }
 }

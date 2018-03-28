@@ -27,5 +27,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     implementation 'com.doing.component:xultrarecyclerview:1.0.0'
+    implementation 'com.doing.component:jpushLib:1.0.0-SNAPSHOT'
+    implementation 'com.doing.component:baidumap-lib:1.0.0'
 
 }

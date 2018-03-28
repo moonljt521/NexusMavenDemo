@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'maven'
+
+def library = rootProject.ext.dependencies
+def version = rootProject.ext.android
+
+repositories {
+    flatDir {
+        dir 'libs'
+    }
+}
+
+android {
+    compileSdkVersion version.compileSdkVersion
+    buildToolsVersion version.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        versionCode version.versionCode
+        versionName version.versionName
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile library["appcompat-v7"]
+    compile 'junit:junit:4.12'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            snapshotRepository(url: MAVEN_REPO_SNAPSHOT_URL) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+            repository(url: MAVEN_REPO_RELEASE_URL) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+
+            pom.groupId = GROUP_ID
+            pom.artifactId = "baidumap-lib"
+            pom.version = "1.0.0"
+//            pom.version = "1.0.0-SNAPSHOT"
+            pom.packaging = TYPE
+        }
+    }
+}
+
